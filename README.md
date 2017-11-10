@@ -13,6 +13,8 @@ You'll be making a Tindr but with pets. You can like/dislike pets. If they like 
 * [Elm](http://elm-lang.org)
 * A text editor. I use [Visual Studio Code](http://code.visualstudio.com) with [Elm support](https://marketplace.visualstudio.com/items?itemName=sbrink.elm) and [HTML-to-Elm](https://marketplace.visualstudio.com/items?itemName=Rubymaniac.vscode-html-to-elm)
 
+Start with cloning this repository. We will use it as our playgroud for the kata.
+
 In your command line prompt go to the _backend_ folder, and execute `npm install` and then `npm start`.
 Open a new command line prompt, go to the _frontend_ folder, and execute `elm-reactor`.
 
