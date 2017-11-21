@@ -1,18 +1,24 @@
-module PetinderView exposing (petinderview)
+module PetinderView exposing (petinderview, Model, Message(..))
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
--- toggleText toggle currentPet =
---     if toggle then
---         div [class "profile-text"]
---           [text currentPet.text]
---     else
---         div []
---             []
+type Message = ToggleMoreInfo
 
-petinderview : a -> Html msg
+type alias Model =
+    { showProfileText : Bool
+    , currentPet :
+        { id : Int
+        , name : String
+        , distance : Int
+        , text : String
+        , photoUrl : String
+        }
+    -- , nextPets: List
+    }
+
+petinderview : Model -> Html Message
 petinderview model =
     div []
         [ petHeader
@@ -28,37 +34,37 @@ petHeader =
             []
         ]
 
-mainContainer : Html msg
+mainContainer : Model -> Html Message
 mainContainer model =
     div [ class "container main-container" ]
-        [ profiles
+        [ profiles model
         , buttonGroup
         ]
 
-profiles : Html msg
-profiles =
+profiles : Model -> Html msg
+profiles model =
     div [ class "profiles" ]
-        [ profile ]
+        [ profile model ]
 
-profile : Html msg
-profile =
+profile : Model -> Html msg
+profile model =
     div [ class "profile" ]
         [ div []
             [ profileImage
-            , profileText
+            , profileText model.showProfileText
             ]
         , identification
         ]
 
 profileImage : Html msg
 profileImage =
-    img [ src "img/profiles/princess.jpg" ][]
+    img [ src "http://localhost:3000/profiles/princess.jpg" ][]
 
-profileText Bool : Html msg
+profileText : Bool -> Html msg
 profileText toggle =
     if toggle then
         div [ class "profile-text" ]
-            [ text "Watch out, boys, because Princess is here and she’s got baby fever like you wouldn’t believe. Princess is all set up to be                            in a family way; she’s got her very own nest, it’s feathered, and she sits on it 23 and half                            hours a day. Golf balls, rocks, other chickens – if she can sit on it and it sort of fits under                            her, then it’s her baby. Princess is a natural leader when it comes to socializing in the flock,                            and you can always count on her to call the other girls over to a tasty treat. Are you also longing                            to hear the pitter patter of little talons in the coop? Do you also looooove tomatoes? Then swipe                            right on Princess, roosters and hentlemen. Serious inquiries only! Princess has got no time for                            head games, no siree.                        " ]
+            [ text "Hello World" ]
     else
         div [][]
 
@@ -71,16 +77,16 @@ identification =
             [ text "25km" ]
         ]
 
-buttonGroup : Html msg
+buttonGroup : Html Message
 buttonGroup =
     div [ class "button-group" ]
         [ button [ class "button-round button-primary button-big icon-x" ]
-            [ img [ src "/img/x-icon.png" ][]
+            [ img [ src "/styling/images/x-icon.png" ][]
             ]
         , button [ class "button-round button-primary button-small button-front" ]
-            [ img [ src "/img/i-icon.png" ][]
+            [ img [ src "/styling/images/i-icon.png", onClick ToggleMoreInfo ][]
             ]
         , button [ class "button-round button-primary button-big" ]
-            [ img [ src "/img/like-icon.png" ][]
+            [ img [ src "/styling/images/like-icon.png" ][]
             ]
         ]
